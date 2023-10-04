@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gerador de Piadas</title>
+</head>
+<body>
+    <h1>Gerador de Piadas</h1>
+    
+    <button id="btnGerarPiadaReacao">Gerar Piada</button>
+
+    <div id="conteudoGerado">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="gerador.js"></script>
+
+    <script>
+        const btnGerarPiadaReacao = document.getElementById('btnGerarPiadaReacao');
+        const conteudoGerado = document.getElementById('conteudoGerado');
+
+        btnGerarPiadaReacao.addEventListener('click', async () => {
+            const { piada, imagemUrl } = await gerarPiadaReacao();
+            conteudoGerado.innerHTML = `
+                <p><strong>Piada:</strong> ${piada}</p>
+                <img src="${imagemUrl}" alt="Reação" />
+            `;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contador de Visitas e Tema</title>
+    <style>
+        body {
+            transition: background-color 0.3s;
+        }
+        .dark-theme {
+            background-color: #333;
+            color: #fff;
+        }
+        .light-theme {
+            background-color: #fff;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contador de Visitas</h1>
+    <p>Total de visitas: <span id="visitas">0</span></p>
+    <button id="mudarTema">Mudar Tema</button>
+
+    <script>
+        function getTema() {
+            const temaSalvo = localStorage.getItem('theme');
+            if (temaSalvo) {
+                return temaSalvo;
+            }
+            return 'light-theme';
+        }
+
+        function setTema(theme) {
+            const body = document.body;
+            body.classList.remove('light-theme', 'dark-theme');
+            body.classList.add(theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        function aumentarVisitas() {
+            let visitas = localStorage.getItem('visitas');
+            if (!visitas) {
+                visitas = 0;
+            }
+            visitas = parseInt(visitas) + 1;
+            localStorage.setItem('visitas', visitas);
+            document.getElementById('visitas').textContent = visitas;
+        }
+
+        function mudarTema() {
+            const temaAtual = getTema();
+            if (temaAtual === 'light-theme') {
+              setTema('dark-theme');
+            } else {
+              setTema('light-theme');
+            }
+        }
+
+        document.getElementById('mudarTema').addEventListener('click', mudarTema);
+        setTema(getTema());
+        aumentarVisitas();
+    </script>
+</body>
+</html>
