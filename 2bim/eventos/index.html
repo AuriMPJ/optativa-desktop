@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eventos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    #teclado {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 5px;
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #input {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 18px;
+      width: 40%;
+    }
+
+    #botaoSalvamento {
+      width: 10%;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<input type="text" id="input" readonly>
+<button id="botaoSalvamento">Salvar Palavra</button>
+
+<div id="teclado"></div>
+
+<script>
+  const tecladoLetras = "QWERTYUIOPASDFGHJKLZXCVBNM";
+
+  const tecladoContainer = document.getElementById('teclado');
+  const input = document.getElementById('input');
+  const botaoSalvamento = document.getElementById('botaoSalvamento');
+
+  tecladoLetras.split('').forEach(letter => {
+    const button = document.createElement('button');
+    button.textContent = letter;
+    button.addEventListener('click', () => addToInput(letter));
+    tecladoContainer.appendChild(button);
+  });
+
+  botaoSalvamento.addEventListener('click', salvarPalavra);
+
+  function addToInput(letter) {
+    input.value += letter;
+  }
+
+  function salvarPalavra() {
+    const word = input.value;
+    alert(`Palavra Salva: ${word}`);
+    input.value = '';
+  }
+</script>
+
+</body>
+</html>
